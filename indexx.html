@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+<style>/* Background */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+/* Top Image */
+img {
+    width: 220px;
+    margin: 20px 0;
+    border-radius: 12px;
+}
+
+/* Form box */
+form {
+    background: #ffffff;
+    padding: 25px;
+    width: 340px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* spacing */
+div {
+    margin-bottom: 12px;
+}
+
+/* labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* inputs */
+input, select {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+/* focus effect */
+input:focus, select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102,126,234,0.5);
+    outline: none;
+}
+
+/* radio inline */
+input[type="radio"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+/* button */
+button {
+    width: 100%;
+    padding: 10px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* hover */
+button:hover {
+    background: #5a67d8;
+}
+</style>
+<script>document.getElementById("myForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let gender = document.getElementById("gender").value;
+    let terms = document.getElementById("terms").checked;
+
+    // Required fields
+    if (name === "" || email === "" || gender === "") {
+        alert("Please fill all required fields");
+        return;
+    }
+
+    // Email validation
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(email)) {
+        alert("Enter a valid email");
+        return;
+    }
+
+    // Phone validation (optional)
+    if (phone !== "" && !/^[0-9]{10}$/.test(phone)) {
+        alert("Enter valid 10-digit phone number");
+        return;
+    }
+
+    // Subscription check
+    let sub = document.querySelector('input[name="subscription"]:checked');
+    if (!sub) {
+        alert("Select a subscription plan");
+        return;
+    }
+
+    // Terms check
+    if (!terms) {
+        alert("Please accept terms");
+        return;
+    }
+
+    alert("✅ Form submitted successfully!");
+});
+</script>
+</head>
+
+<body>
+<img src="https://t3.ftcdn.net/jpg/04/88/86/82/360_F_488868278_2bdWrrjtQi2g7KJMV6fL1muBsNSgbf69.jpg" alt="Plan">
+    <form id="myForm">
+        <h1>Form</h1>
+
+        <div>
+            <label for="name">Name</label>
+            <input id="name" type="text" required>
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" required>
+        </div>
+
+        <div>
+            <label for="dob">DOB</label>
+            <input id="dob" type="date" required>
+        </div>
+
+        <div>
+            <label for="father">Father's Name</label>
+            <input id="father" type="text" required>
+        </div>
+
+        <div>
+            <label for="mother">Mother's Name</label>
+            <input id="mother" type="text" required>
+        </div>
+
+        <div>
+            <label for="phone">Alternate Phone</label>
+            <input id="phone" type="tel">
+        </div>
+
+        <div>
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div>
+            <p>Subscription Plan</p>
+            <input id="basic" type="radio" name="subscription">
+            <label for="basic">Basic</label>
+
+            <input id="premium" type="radio" name="subscription">
+            <label for="premium">Premium</label>
+
+            <input id="vip" type="radio" name="subscription">
+            <label for="vip">VIP</label>
+        </div>
+
+        <div>
+            <input id="terms" type="checkbox" required>
+            <label for="terms">I agree to terms</label>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
